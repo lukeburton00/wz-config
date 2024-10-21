@@ -4,7 +4,7 @@ local config = {}
 config.font = wezterm.font 'JetBrains Mono'
 config.color_scheme = "Catppuccin Mocha"
 
-config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
 config.keys = {
     {
         key = "'",
