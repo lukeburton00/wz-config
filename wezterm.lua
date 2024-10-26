@@ -1,10 +1,18 @@
 local wezterm = require 'wezterm'
+local sessionizer = require 'sessionizer'
 local config = {}
+
+if wezterm.config_builder then
+    config = wezterm.config_builder()
+end
 
 config.font = wezterm.font 'JetBrains Mono'
 config.color_scheme = "Catppuccin Mocha"
 
-config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
+config.tab_bar_at_bottom = true
+config.hide_tab_bar_if_only_one_tab = true
+
+config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 2000 }
 config.keys = {
     {
         key = "'",
@@ -26,6 +34,18 @@ config.keys = {
         mods = 'LEADER',
         action = wezterm.action.SpawnTab 'CurrentPaneDomain'
     },
+    {
+        key = 'f',
+        mods = 'CTRL',
+        action = wezterm.action_callback(sessionizer.toggle)
+    },
+    {
+        key = 'h',
+        mods = 'LEADER',
+        action = wezterm.action.SwitchToWorkspace {
+        name = 'default',
+    },
+  },
 }
 
 -- <leader> 1 through 8 switch to respective tab
@@ -37,8 +57,21 @@ for i = 1, 9 do
     })
 end
 
+-- OS Specific Configs
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     config.default_prog = { 'pwsh.exe'}
+end
+
+if wezterm.target_triple:find("darwin") ~= nil then
+    config.font_size = 14
+
+    sessionizer.config = {
+        paths = {
+            "~/dev",
+            "~/.config/",
+        }
+    }
+
 end
 
 return config
