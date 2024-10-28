@@ -12,6 +12,8 @@ config.color_scheme = "Catppuccin Mocha"
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 
+config.disable_default_key_bindings = true
+
 config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 2000 }
 config.keys = {
     {
@@ -48,7 +50,7 @@ config.keys = {
   },
 }
 
--- <leader> 1 through 8 switch to respective tab
+-- <leader> 1 through 9 switch to respective tab
 for i = 1, 9 do
     table.insert(config.keys, {
         key = tostring(i),
@@ -64,14 +66,6 @@ end
 
 if wezterm.target_triple:find("darwin") ~= nil then
     config.font_size = 14
-
-    sessionizer.config = {
-        paths = {
-            "~/dev",
-            "~/.config/",
-        }
-    }
-
 end
 
 return config
