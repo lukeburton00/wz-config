@@ -11,6 +11,8 @@ config.font = wezterm.font 'JetBrains Mono'
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 
+config.max_fps = 240
+
 config.leader = { key = 'b', mods = 'CTRL', timeout_milliseconds = 2000 }
 config.keys = {
     {
