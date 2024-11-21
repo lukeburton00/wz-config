@@ -22,6 +22,13 @@ if wezterm.target_triple:find("darwin") ~= nil then
     configPath = home .. "/.config"
 end
 
+if wezterm.target_triple:find("linux") then
+    home = os.getenv( "HOME" )
+    fd = "/usr/bin/fd"
+    rootPath = home .. "/dev"
+    configPath = home .. "/.config"
+end
+
 M.toggle = function(window, pane)
   local projects = {}
 
