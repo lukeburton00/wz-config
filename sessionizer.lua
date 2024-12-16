@@ -8,26 +8,10 @@ local fd
 local rootPath
 local configPath
 
-if wezterm.target_triple:find("windows") ~= nil then
-    home = os.getenv( "USERPROFILE" )
-    fd = home .. "/AppData/Local/Microsoft/WinGet/Packages/sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe/fd-v10.2.0-x86_64-pc-windows-msvc/fd.exe"
-    rootPath = "C:/Dev"
-    configPath = home .. "/.config"
-end
-
-if wezterm.target_triple:find("darwin") ~= nil then
-    home = os.getenv( "HOME" )
-    fd = "/opt/homebrew/bin/fd"
-    rootPath = home .. "/dev"
-    configPath = home .. "/.config"
-end
-
-if wezterm.target_triple:find("linux") then
-    home = os.getenv( "HOME" )
-    fd = "/usr/bin/fd"
-    rootPath = home .. "/dev"
-    configPath = home .. "/.config"
-end
+home = os.getenv( "USERPROFILE" )
+fd = home .. "/AppData/Local/Microsoft/WinGet/Packages/sharkdp.fd_Microsoft.Winget.Source_8wekyb3d8bbwe/fd-v10.2.0-x86_64-pc-windows-msvc/fd.exe"
+rootPath = "C:/Dev"
+configPath = home .. "/.config"
 
 M.toggle = function(window, pane)
   local projects = {}
