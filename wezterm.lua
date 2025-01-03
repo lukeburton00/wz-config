@@ -1,11 +1,7 @@
 local wezterm = require 'wezterm'
 local config = {}
 
-if wezterm.config_builder then
-    config = wezterm.config_builder()
-end
-
-config.font = wezterm.font 'JetBrains Mono'
+config.font = wezterm.font('JetBrains Mono')
 config.color_scheme = 'Molokai'
 
 config.tab_bar_at_bottom = true
@@ -16,63 +12,47 @@ config.max_fps = 240
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
 config.keys = {}
 
--- OS Specific Configs
-if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-    -- Behave like Tmux on Windows
-    local sessionizer = require 'sessionizer'
-    config.keys = {
-        {
-            key = "'",
-            mods = 'LEADER',
-            action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }
-        },
-        {
-            key = "%",
-            mods = 'LEADER|SHIFT',
-            action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }
-        },
-        {
-            key = "d",
-            mods = 'LEADER',
-            action = wezterm.action.CloseCurrentPane { confirm = true }
-        },
-        {
-            key = "c",
-            mods = 'LEADER',
-            action = wezterm.action.SpawnTab 'CurrentPaneDomain'
-        },
-        {
-            key = 'f',
-            mods = 'CTRL',
-            action = wezterm.action_callback(sessionizer.toggle)
-        },
-        {
-            key = 'h',
-            mods = 'LEADER',
-            action = wezterm.action.SwitchToWorkspace {
-                name = 'default',
-            }
-        },
-    }
+config.keys = {
+    {
+        key = "'",
+        mods = 'LEADER',
+        action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }
+    },
+    {
+        key = "%",
+        mods = 'LEADER|SHIFT',
+        action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }
+    },
+    {
+        key = "d",
+        mods = 'LEADER',
+        action = wezterm.action.CloseCurrentPane { confirm = true }
+    },
+    {
+        key = "c",
+        mods = 'LEADER',
+        action = wezterm.action.SpawnTab 'CurrentPaneDomain'
+    },
+    {
+        key = 'h',
+        mods = 'LEADER',
+        action = wezterm.action.SwitchToWorkspace {
+            name = 'default',
+        }
+    },
+    {
+        key = "Tab",
+        mods = "CTRL",
+        action = wezterm.action.DisableDefaultAssignment,
+    },
+}
 
-    for i = 1, 9 do
-        table.insert(config.keys, {
-            key = tostring(i),
-            mods = 'LEADER',
-            action = wezterm.action.ActivateTab(i - 1),
-        })
-    end
-    config.default_prog = { 'pwsh.exe'}
-
-else
-    -- Give CTRL-Tab behavior to Tmux
-    config.keys = {
-        {
-            key = "Tab",
-            mods = "CTRL",
-            action = wezterm.action.DisableDefaultAssignment,
-        },
-    }
+for i = 1, 9 do
+    table.insert(config.keys, {
+        key = tostring(i),
+        mods = 'LEADER',
+        action = wezterm.action.ActivateTab(i - 1),
+    })
 end
 
 if wezterm.target_triple:find("darwin") ~= nil then
