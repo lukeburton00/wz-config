@@ -2,6 +2,8 @@ local wezterm = require 'wezterm'
 local config = {}
 
 config.font = wezterm.font('JetBrains Mono')
+config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
+
 config.color_scheme = 'Molokai'
 
 config.tab_bar_at_bottom = true
@@ -57,6 +59,10 @@ end
 
 if wezterm.target_triple:find("darwin") ~= nil then
     config.font_size = 14
+end
+
+if wezterm.target_triple:find("windows") ~= nil then
+    config.default_prog = { 'pwsh.exe'}
 end
 
 return config
