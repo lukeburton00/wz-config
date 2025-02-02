@@ -3,7 +3,7 @@ local config = {}
 
 config.font = wezterm.font('JetBrains Mono')
 config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
-
+config.window_background_opacity = 0.8 
 config.color_scheme = 'Molokai'
 
 config.tab_bar_at_bottom = true
