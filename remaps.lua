@@ -33,11 +33,6 @@ remaps.keys = {
             name = 'default',
         }
     },
-    {
-        key = "Tab",
-        mods = "CTRL",
-        action = wezterm.action.DisableDefaultAssignment,
-    },
 }
 
 
