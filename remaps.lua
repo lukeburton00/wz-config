@@ -3,7 +3,6 @@ local wezterm = require 'wezterm'
 local remaps = {}
 
 remaps.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
-remaps.keys = {}
 
 remaps.keys = {
     {
@@ -33,6 +32,11 @@ remaps.keys = {
             name = 'default',
         }
     },
+    {
+        key = 'n',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.DisableDefaultAssignment
+    }
 }
 
 
