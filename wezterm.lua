@@ -5,7 +5,7 @@ local config = {}
 config.font = wezterm.font('JetBrains Mono')
 config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
 
-config.color_scheme = 'Black Metal (Immortal) (base16)'
+config.colors = require("colors.no-clown-fiesta")
 
 config.leader = remaps.leader
 config.keys = remaps.keys
